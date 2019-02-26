@@ -1,0 +1,15 @@
+{
+  "name": "vehicle",
+  "version": "1.0.0",
+  "description": "smart contract for vehicle",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "smart",
+    "contract"
+  ],
+  "author": "Gelu Liuta",
+  "license": "MIT"
+}
