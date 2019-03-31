@@ -5,11 +5,11 @@ pragma solidity ^0.4.25;
 
 contract Vehicle {
 
-  address public owner; //actual owner of the vehicle - manager of the smart contract for the vehicle
+  address public ownerVehicle; //actual owner of the vehicle - manager of the smart contract for the vehicle
   mapping (address => uint) balances; //testcode
 
-  string public ownerName //name (prename and familiy name) of the owner
-  string public email;  //contact contact for the property owner
+  string public ownerName; //name (prename and familiy name) of the owner
+  string public emailOwner;  //contact contact for the property owner
   string public telephone; //telephone number of the vehicle owner
 
   bool public statusVehicle;   //is the property visible or not for the blockchain participants 
@@ -17,42 +17,53 @@ contract Vehicle {
     
 // vehicle attributes according to Mercedes-Benz vehicle definition
   string public vehicleChassyNumber; //Chassy Number according to the registration paper
+  string public vehicleBrand; // For example Mercedes-Benz, BMW etc. In a future development can be a enum type
   string public vehicleSalesDesignation; //According to Mercedes-Benz master data
-  uint public vehicleActual Milage; //last known vehicle milage
+  uint40 public vehicleActualMilage; //last known vehicle milage
 
-  uint public vehicleValue;    //actual vehicle value according to owner declaration
-
+  uint48 public vehicleValue;    //actual vehicle value according to owner declaration
   string public vehicleyNotes; //memo field for extra information  - Vorbemerkungen
+
+  struct Repair{
+    address partner; // Ethereum address of the partner executing the repair
+    string  repairDate; // the date the repair was executed
+    string  repairDescription; //description of the repairs performed
+    uint40  mileageReparir; // vehicle mileage at the repair date
+    string  repairType; // type of the repair performed (can be to a latter development type as an enum type)
+  }
+// A dynamically-sized array of `Repair` structs.
+  Repair[] public repairs; //vehicle repair history as an dinamic array
 
 
 //Smart Contract Constructor
-constructor(string memory eMail, uint propValue) public {
-    owner = msg.sender;
-    status = true;
-    email = eMail;
-    propertyValue = propValue; 
+constructor(string memory _vehicleChassyNumber, string _vehicleBrand, string memory _vehicleSalesDesignation) public {
+  
+  ownerVehicle = msg.sender; // first owner is the production factory of the vehicle
 
+  vehicleChassyNumber=_vehicleChassyNumber; //Chassy Number according to the registration paper
+  vehicleBrand = _vehicleBrand; //The brand of the vehicle will be recorded
+  vehicleSalesDesignation=_vehicleSalesDesignation; //According to Mercedes-Benz master data
+  vehicleActualMilage=0;
   }
 
   modifier restricted() {
-    if (msg.sender == owner) _;
+    if (msg.sender == ownerVehicle) _;
   }
 
-function setVehicleValue(uint newValue) public {
+function setVehicleValue(uint48 newValue) public {
     vehicleValue = newValue;
 }
 
-function getVehicleValue() public view returns (uint pValue) {
+function getVehicleValue() public view returns (uint48) {
     return vehicleValue;
 }
 
-function setEmail(string memory newEMailAdress) public {
-    email = newEMailAdress;
+function setEmailOwner(string memory newEMailAdress) public {
+    emailOwner = newEMailAdress;
 }
 
-
-function queryBalance() public view returns (uint256) {
-        return this.balance;
-    }
+function getEmailOwner() public view returns (string) {
+    return emailOwner;
+}
 
 }
