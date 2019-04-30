@@ -1,6 +1,7 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
-const {interface, bytecode} = require('./compile');
+const compiledVehicle = require ('./build/Vehicle.json');
+//const {interface, bytecode} = require('./compile');
 
 
 const provider = new HDWalletProvider (
@@ -18,11 +19,11 @@ const deployFunction = async () => {
 
     console.log('Attempting to deploy contract from the Rinkeby account: ', accounts[0]);
 
-    vehicle= await new web3.eth.Contract(JSON.parse(interface))
-    .deploy({data:bytecode, arguments: ['WDC1569031J433809', 'Mercedes-Benz', 'GLA 220d EC']})
-    .send({from:accounts[0], gas:'1000000'});
+    vehicle= await new web3.eth.Contract(JSON.parse(compiledVehicle.interface))
+    .deploy({data:compiledVehicle.bytecode, arguments: ["WDD2054781F820348", "Mercedes-Benz", "C 200 4M", "27.11.2018", "leasing vehicle geloo"]})
+    .send({from:accounts[0], gas:'2000000'});
 
-    console.log(interface);
+    console.log(compiledVehicle.interface);
     console.log('The adress of the new contract is: ', vehicle.options.address);
 
     console.log('Deployment completed');

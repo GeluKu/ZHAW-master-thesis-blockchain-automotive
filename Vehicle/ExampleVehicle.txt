@@ -1,1 +1,11 @@
-"WDC1569031J433809", "GLA 220d EC"
+"WDC1569031J433809", "Mercedes-Benz", "GLA 220d EC", "01.04.2019", "some notes"
+
+"WDD2054781F820348", "Mercedes-Benz", "C 200 4M", "27.11.2018", "leasing vehicle geloo"
+
+"WDD2000001F820348", "Mercedes-Benz", "E 300 4M", "01.01.2018", "interesting car"   0x0af4efd8d6cb70d0255e20761e473399fe10e8d3
+
+25000, "maintenance", "Some ordinary mainenance repair"
+25700, "insurance", "Some ordinary insurance repair"
+
+
+0xe1d5C5f3955117c4F928B46d407f1E40771E9ceF  smart
